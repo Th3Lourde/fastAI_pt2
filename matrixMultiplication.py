@@ -10,7 +10,43 @@ Shouldn't be too hard :)
 '''
 
 # Assuming x,y will be List[List[int]]
-def maxtrixMult(x,y):
+def matrixMult(x, y):
+    def rowByM(rowI, y):
+        # print("row: {}".format(rowI))
+        ans = []
+        for col in range(len(y[0])):
+            tmp = []
+            for row in range(len(y)):
+                # print(y[row][col])
+                # print(row)
+                # print(rowI[row]*y[row][col])
+                tmp.append(rowI[row]*y[row][col])
+            # print(tmp)
+            ans.append(sum(tmp))
+        return ans
+
+    if (type(x) != list or type(x[0]) != list) or (type(y) != list or type(y[0]) != list):
+        print("[Error] inputs are not both matrices")
+        return None
+
+    elif len(x[0]) != len(y):
+        print("[Error] dimensions of inputs do not meet computational requirements")
+        return None
+
+    ans = []
+
+    for i in range(len(x)):
+        # print(rowByM(x[i], y))
+        ans.append(rowByM(x[i], y))
+
+    # print("ans: {}".format(ans))
+
+    return ans
+
+
+
+# old implementation, does not work
+def matrixMult_1(x,y):
     # 1) order matters, so this is x*y
     # num of columns in x must equal
     # num of rows in y, or we can't
@@ -45,20 +81,20 @@ def maxtrixMult(x,y):
             b.append(y[h][k])
 
 
-    # print("a: {}".format(a))
-    # print("b: {}".format(b))
+    print("a: {}".format(a))
+    print("b: {}".format(b))
 
     for i in range(len(a)):
         a[i] *= b[i]
 
     # print("a: {}".format(a))
 
-    for i in range(len(x[0])): # number of rows in ans
-        start = i*len(y[0])
-        end = i*len(y[0]) + len(y[0]) + 1
-        tmp.append(a[start:end])
-
-    print(tmp)
+    # for i in range(len(x[0])): # number of rows in ans
+    #     start = i*len(y[0])
+    #     end = i*len(y[0]) + len(y[0]) + 1
+    #     tmp.append(a[start:end])
+    #
+    # print(tmp)
 
 
 
@@ -83,16 +119,16 @@ if __name__ == '__main__':
     y: {{4,5,6},{6,5,4},{4,6,5}}
     '''
 
-    x = [
-        [1,2,3],
-        [3,2,1],
-        [1,2,3],
-        ]
+    # x = [
+    #     [1,2,3],
+    #     [3,2,1],
+    #     [1,2,3],
+    #     ]
+    #
+    # y = [
+    #     [4,5,6],
+    #     [6,5,4],
+    #     [4,6,5],
+    #     ]
 
-    y = [
-        [4,5,6],
-        [6,5,4],
-        [4,6,5],
-        ]
-
-    maxtrixMult(x,y)
+    # print(matrixMult(x,y))
